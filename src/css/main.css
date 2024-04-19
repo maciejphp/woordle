@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(skyblue, white);
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+}
+
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.MTop15 {
+  margin-top: 15px;
+}
+
+.FS64 {
+  font-size: 64px;
+}
+
+span {
+  font-size: 24px;
+}
+
+svg {
+  position: absolute;
+  z-index: -1;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: greenyellow;
+}
