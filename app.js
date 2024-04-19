@@ -4,34 +4,29 @@ const button = document.querySelector("#submitButton");
 
 let guesses = 8;
 
-const words = [
-    "ginger",
-    "mensen",
-    "tafels",
-    "vaders",
-    "tanden",
-    "rammen",
-    "katten",
-    "laders",
-    "potjes",
-    "laders",
-    "koffie"
-];
+let words;
+let guessWord;
 
-async function logMovies() {
+async function getWords() {
     const response = await fetch("http://customapis.dylanvanderven.fyi/Words.php");
-    const movies = await response.json();
-    console.log(movies);
+    words = await response.json();
+    guessWord = words[Math.floor(Math.random() * words.length)][1].toLowerCase();
+    console.log(guessWord);
 }
-logMovies()  
+getWords()  
 
-const guessWord = words[Math.floor(Math.random() * words.length)];
-console.log(guessWord);
 
 button.addEventListener("click", ()=> {
     const word = textInput.value;
     let coloredWord = "";
     textInput.value = "";
+    let wordExists = false;
+
+    //check of het woordenlijst ingeladen is
+    if (!guessWord) {
+        alert("het woord is nog niet ingeladen");
+        return;
+    }
 
     //kijk of het woord 6 letter is
     if (word.length != 6) {
@@ -39,9 +34,22 @@ button.addEventListener("click", ()=> {
         return;
     }
 
+    //check of het woord bestaat
+    for (wordInwordList of words) {
+        wordInwordList = wordInwordList[1].toLowerCase();
+        if (wordInwordList === word.toLowerCase()) {
+            wordExists = true;
+            break;
+        }
+    }
+    if (!wordExists) {
+        alert("het woord bestaat in onze woorden lijst");
+        return;
+    }
+
     //kijk of je een letter hebt geraden
     for (let i = 0; i < word.length; i++) {
-        const letter = word.charAt(i);
+        const letter = word.charAt(i).toLowerCase();
 
         let letterRightPlace = false;
         let wordHasLetter = false;
