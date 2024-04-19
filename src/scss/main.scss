@@ -26,7 +26,9 @@ svg{
     position: absolute;
     z-index: -1;
 }
-
+*{
+    overflow: hidden;
+}
 .orange {
     background-color: orange;
 }
