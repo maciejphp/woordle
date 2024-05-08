@@ -47,6 +47,13 @@ button.addEventListener("click", ()=> {
         return;
     }
 
+    //kijk if je nog beuren over hebt
+    guesses--;
+    if (guesses <= 0) {
+        alert(`je beurten zijn zijn op. het word was ${guessWord}`);
+        return;
+    }
+
     //kijk of je een letter hebt geraden
     for (let i = 0; i < word.length; i++) {
         const letter = word.charAt(i).toLowerCase();
@@ -85,10 +92,5 @@ button.addEventListener("click", ()=> {
     //kijk of je het woord hebt geraden
     if (word === guessWord) {
         alert("je hebt het word geraden");
-    }
-
-    guesses--;
-    if (guesses <= 0) {
-        alert(`je beurten zijn zijn op. het word was ${guessWord}`);
     }
 })
