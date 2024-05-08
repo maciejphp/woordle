@@ -37,10 +37,21 @@ svg {
   overflow: hidden;
 }
 
+
+#container > div{
+  margin: 10px
+}
+.orange, .green, .letter {
+  padding: 10px;
+  margin: 5px
+}
 .orange {
   background-color: orange;
 }
 
 .green {
-  background-color: greenyellow;
+  background-color: green;
+}
+.letter {
+  background-color: gray;
 }

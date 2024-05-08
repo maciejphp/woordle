@@ -2,7 +2,7 @@ const container = document.querySelector("#container");
 const textInput = document.querySelector("#textInput");
 const button = document.querySelector("#submitButton");
 
-let guesses = 8;
+let guesses = 7;
 
 let words;
 let guessWord;
@@ -58,6 +58,8 @@ button.addEventListener("click", ()=> {
             const guessLetter = guessWord.charAt(ii);
 
             if (guessLetter === letter && i === ii) {
+            console.log(i,ii)
+
                 letterRightPlace = true;
                 break;
             }else if (guessLetter === letter) {
@@ -71,7 +73,7 @@ button.addEventListener("click", ()=> {
         }else if (wordHasLetter) {
             coloredWord +=`<span class='orange'>${letter}</span>`;
         }else {
-            coloredWord +=`<span>${letter}</span>`;
+            coloredWord +=`<span class='letter'>${letter}</span>`;
         }
     }
 
