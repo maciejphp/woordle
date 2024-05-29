@@ -37,21 +37,51 @@ svg {
   overflow: hidden;
 }
 
-
-#container > div{
-  margin: 10px
-}
-.orange, .green, .letter {
-  padding: 10px;
-  margin: 5px
-}
 .orange {
   background-color: orange;
 }
 
 .green {
-  background-color: green;
+  background-color: greenyellow;
 }
-.letter {
-  background-color: gray;
+
+.Tright {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 3;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.Trightl {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 6%;
+  right: 2%;
+  z-index: 3;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.Tleft {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  z-index: 3;
+  width: 220px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.M0 {
+  margin: 0;
 }
