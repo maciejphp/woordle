@@ -13,8 +13,10 @@ async function getWords() {
     guessWord = words[Math.floor(Math.random() * words.length)][1].toLowerCase();
     console.log(guessWord);
 }
-getWords()  
+getWords();
 
+//connect to da server
+const webSocket = new WebSocket('wss://goofy-woordle-game.glitch.me/');
 
 button.addEventListener("click", ()=> {
     const word = textInput.value;
