@@ -1,0 +1,56 @@
+.container {
+  background-color: #99a3b0;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4%;
+  border: 1px solid black;
+  border-radius: 8%;
+}
+
+.C1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: #c6d3e3;
+  max-width: 1920px;
+  overflow: hidden;
+}
+
+a, p, h1, h2, h3, h4, h5, h6, label {
+  color: white;
+  margin: 0;
+}
+
+input[type=submit] {
+  width: 97.3%;
+  margin-top: 15px;
+}
+
+.container3 {
+  background-color: #99a3b0;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4%;
+  border: 1px solid black;
+  border-radius: 8%;
+}
+
+.Fwidth {
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+}/*# sourceMappingURL=login.css.map */
