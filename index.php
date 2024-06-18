@@ -7,6 +7,60 @@
     <link rel="stylesheet" href="src/css/main.css">
 </head>
 <body>
+<?php
+session_start();
+    if (isset($_SESSION['Username'])) {
+        $Username = $_SESSION['Username'];
+        echo "<p class='Tright'> Welcome " . $Username . "!</p><br>";
+        echo "<button class='Trightl'><a href='pages/logout.php'>Logout</a></button>";
+    } else {
+        echo '<div class="Tright">
+        <a href="pages/login.php">
+            <button>
+                Login
+            </button>
+        </a>
+        <p class="M0">or</p>
+            <a href="pages/register.php">
+                <button>
+                    register
+                </button>
+            </a>
+        </div>';
+    }
+?>
+<div class="Tleft">
+    <?php
+        if(isset($_SESSION['IsAdmin'])){
+            $IsAdmin = $_SESSION['IsAdmin'];
+            if($IsAdmin == 1){
+                echo "<a href='pages/dashboard.php'>Dashboard</a>";
+            }
+        }
+    ?>
+</div>
+<div id="draggable">
+        <?php
+        $config = include('config.php');
+
+        $sUser = $config['user'];
+        $sDb = $config['name'];
+        $sPass = $config['pass'];
+        $sHost = $config['host'];
+
+        $conn = new mysqli($sHost, $sUser, $sPass, $sDb);
+        $leaderboard = $conn->prepare('SELECT Username, CorrectGuesses FROM users WHERE IsAdmin=0 ORDER BY CorrectGuesses DESC LIMIT 10');
+        $leaderboard->execute();
+        $leaderboard->bind_result($Username, $CorrectGuesses);
+
+        echo "<table>";
+        echo "<tr><th class='br1'>Username</th><th>CorrectGuesses</th></tr>";
+        while($leaderboard->fetch()) {
+            echo "<tr><td class='br1'>$Username</td><td>$CorrectGuesses</td></tr>";
+        }
+        echo "</table>";
+        ?>
+    </div>
     <svg width="1603" height="651" viewBox="0 0 1603 651" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="path-1-inside-1_15_3" fill="white">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M1342.09 184.148C1317.68 176.36 1300 153.494 1300 126.5C1300 93.0868 1327.09 66 1360.5 66C1363.35 66 1366.16 66.1973 1368.9 66.5791C1379.32 48.3143 1398.97 36 1421.5 36C1432.62 36 1443.04 39.0017 1452 44.2392C1460.96 39.0017 1471.38 36 1482.5 36C1510.92 36 1534.76 55.5956 1541.25 82.0126C1541.67 82.0042 1542.08 82 1542.5 82C1575.91 82 1603 109.087 1603 142.5C1603 175.913 1575.91 203 1542.5 203C1542 203 1541.5 202.994 1541 202.982C1534.16 228.895 1510.56 248 1482.5 248C1467.17 248 1453.16 242.295 1442.5 232.891C1431.84 242.295 1417.83 248 1402.5 248C1369.09 248 1342 220.913 1342 187.5C1342 186.375 1342.03 185.258 1342.09 184.148Z"/>
