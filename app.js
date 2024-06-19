@@ -7,6 +7,18 @@ let guesses = 7;
 let words;
 let guessWord;
 
+const alert = document.querySelector(".alert");
+function setAlert(display, text) {
+    if (!display) {
+        alert.style.display = "none";
+        return;
+    }else {
+        alert.style.display = "Block";
+    }
+
+    alert.innerText = text;
+}
+
 async function getWords() {
     const response = await fetch("http://customapis.dylanvanderven.fyi/Words.php");
     words = await response.json();
@@ -15,10 +27,18 @@ async function getWords() {
 }
 getWords();
 
+
+
 //connect to da server
 const webSocket = new WebSocket('wss://goofy-woordle-game.glitch.me/');
+webSocket.onopen = () => {
+    webSocket.send("yo");
+}
 
 button.addEventListener("click", ()=> {
+    //zet
+    setAlert(false);
+
     const word = textInput.value;
     let coloredWord = "";
     textInput.value = "";
@@ -26,13 +46,13 @@ button.addEventListener("click", ()=> {
 
     //check of het woordenlijst ingeladen is
     if (!guessWord) {
-        alert("het woord is nog niet ingeladen");
+        setAlert(true, "het woord is nog niet ingeladen");
         return;
     }
 
     //kijk of het woord 6 letter is
     if (word.length != 6) {
-        alert("het woord is niet 6 letters lang");
+        setAlert(true, "het woord is niet 6 letters lang");
         return;
     }
 
@@ -45,14 +65,14 @@ button.addEventListener("click", ()=> {
         }
     }
     if (!wordExists) {
-        alert("het woord bestaat in onze woorden lijst");
+        setAlert(true, "het woord bestaat in onze woorden lijst");
         return;
     }
 
     //kijk if je nog beuren over hebt
     guesses--;
     if (guesses <= 0) {
-        alert(`je beurten zijn zijn op. het word was ${guessWord}`);
+        setAlert(true, `je beurten zijn zijn op. het word was ${guessWord}`);
         return;
     }
 
@@ -73,7 +93,7 @@ button.addEventListener("click", ()=> {
                 break;
             }else if (guessLetter === letter) {
                 wordHasLetter = true;
-                break;
+                // break;
             }      
         }
 
