@@ -1,20 +1,21 @@
+import config from './config.js';
+const api = config.api;
+
 const container = document.querySelector("#container");
 const textInput = document.querySelector("#textInput");
 const button = document.querySelector("#submitButton");
-
 let guesses = 7;
 
 let words;
 let guessWord;
 
 async function getWords() {
-    const response = await fetch("http://customapis.dylanvanderven.fyi/Words.php");
+    const response = await fetch(api);
     words = await response.json();
     guessWord = words[Math.floor(Math.random() * words.length)][1].toLowerCase();
     console.log(guessWord);
 }
-getWords()  
-
+getWords();  
 
 button.addEventListener("click", ()=> {
     const word = textInput.value;
@@ -35,7 +36,7 @@ button.addEventListener("click", ()=> {
     }
 
     //check of het woord bestaat
-    for (wordInwordList of words) {
+    for (let wordInwordList of words) {
         wordInwordList = wordInwordList[1].toLowerCase();
         if (wordInwordList === word.toLowerCase()) {
             wordExists = true;
@@ -43,15 +44,17 @@ button.addEventListener("click", ()=> {
         }
     }
     if (!wordExists) {
-        alert("het woord bestaat in onze woorden lijst");
+        alert("het woord bestaat niet in onze woorden lijst");
         return;
     }
 
-    //kijk if je nog beuren over hebt
+    //kijk if je nog beurten over hebt
     guesses--;
     if (guesses <= 0) {
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
         alert(`je beurten zijn zijn op. het word was ${guessWord}`);
-        return;
     }
 
     //kijk of je een letter hebt geraden
@@ -91,6 +94,9 @@ button.addEventListener("click", ()=> {
 
     //kijk of je het woord hebt geraden
     if (word === guessWord) {
-        alert("je hebt het word geraden");
+        alert("je hebt het word geraden, jippie");
+        setTimeout(function() {
+            window.location.href= "pages/correctGuess.php";
+        }, 1000);
     }
-})
+});
