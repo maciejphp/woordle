@@ -50,16 +50,17 @@ $connection = new mysqli($shost, $suser, $spass, $db);
             echo "</div>";
             
         } else {
-            $stmt_Recieve = $connection->prepare("SELECT CorrectGuesses FROM users WHERE Username = ?");
+            $stmt_Recieve = $connection->prepare("SELECT CorrectGuesses, GamesPlayed FROM users WHERE Username = ?");
             $stmt_Recieve->bind_param('s', $_SESSION['Username']);
             $stmt_Recieve->execute();
-            $stmt_Recieve->bind_result($CorrectGuesses);
+            $stmt_Recieve->bind_result($CorrectGuesses, $GamesPlayed);
             $stmt_Recieve->fetch();
 
             $stmt_Recieve->close();
             $CorrectGuesses += 1;
-            $stmt_Update = $connection->prepare("UPDATE users SET CorrectGuesses = ? WHERE Username = ?");
-            $stmt_Update->bind_param("is", $CorrectGuesses, $_SESSION['Username']);
+            $GamesPlayed += 1;
+            $stmt_Update = $connection->prepare("UPDATE users SET CorrectGuesses = ?, GamesPlayed=? WHERE Username = ?");
+            $stmt_Update->bind_param("iis", $CorrectGuesses, $GamesPlayed, $_SESSION['Username']);
             $stmt_Update->execute();
 
             $stmt_Update->close();

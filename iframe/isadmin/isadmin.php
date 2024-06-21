@@ -21,7 +21,7 @@ $conn = new mysqli($sHost, $sUser, $sPass, $sDb);
         }
         .b1px{
             border: 1px solid black;
-            width: 42.5%;
+            width: fit-content;
             border-radius: 10px;
         }
         .gray{
@@ -91,17 +91,19 @@ $conn = new mysqli($sHost, $sUser, $sPass, $sDb);
                 while ($row = $stmt->fetch_assoc()) {
                     if (htmlspecialchars($row['IsAdmin']) == 0) {
                         echo "<li class='m5'>" . htmlspecialchars($row['Username']) . " -- IsAdmin: No" . "</li>";
-                    } else {
+                    } else if(htmlspecialchars($row['IsAdmin']) == 1) {
                         echo "<li class='m5'>" . htmlspecialchars($row['Username']) . " -- IsAdmin: Yes" . "</li>";
                     }
                 }
+                $stmt->close();
+                $conn->close();
             ?>
         </ul>
         <form action="updateAdmin.php" method="POST">
             <div class="b1px gray bottom" id="draggable">
-                <input type="text" placeholder="Username" id="editableInput" name="Username">
+                <input type="text" placeholder="Username" id="editableInput" name="Username"><br>
                 <label for="isAdmin">Admin:</label>
-                <input type="checkbox" name="isAdmin">
+                <input type="checkbox" name="isAdmin"><br>
                 <input type="submit">
             </div>
         </form>

@@ -75,7 +75,7 @@ button.addEventListener("click", ()=> {
     guesses--;
     if (guesses <= 0) {
         setTimeout(function() {
-            location.reload();
+            window.location.href = "pages/wrong.php";
         }, 1000);
         setAlert(true, `je beurten zijn zijn op. het word was ${guessWord}`);
     }
@@ -117,7 +117,7 @@ button.addEventListener("click", ()=> {
 
     //kijk of je het woord hebt geraden
     if (word === guessWord) {
-        alert("je hebt het word geraden, jippie");
+        setAlert(true, "je hebt het word geraden, jippie");
         setTimeout(function() {
             window.location.href= "pages/correctGuess.php";
         }, 1000);
